@@ -36,8 +36,11 @@ export class RegistrarUsuarioComponent implements OnInit {
   
     switch(code){
       case 'auth/email-already-in-use':
-      return 'El usuario ya existe'
-
+      return 'El usuario ya existe';
+      case 'auth/weak-password':
+        return 'La contraseña es muy debil';
+      case 'auth/invalid-email':
+        return 'Correo invalido';
       default:
       return 'Error desconocido'
 
