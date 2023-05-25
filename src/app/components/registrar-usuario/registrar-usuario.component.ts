@@ -41,9 +41,10 @@ export class RegistrarUsuarioComponent implements OnInit {
     this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        this.loading = false;
+       /* this.loading = false;
         this.toastr.success('El usuario fue registrado correctamente', 'Usuario registrado')
-        this.router.navigate(['/login'])
+        this.router.navigate(['/login']);*/
+        this.verificarCorreo();
       })
       .catch((error) => {
         this.loading = false;
@@ -51,5 +52,15 @@ export class RegistrarUsuarioComponent implements OnInit {
       });
   }
 
+  verificarCorreo(){
+    this.afAuth.currentUser.then(user => user?.sendEmailVerification())
+    .then(() =>{
+      this.toastr.info(
+        'Le enviamos un correo electrónico para su verificación',
+        'Verificar correo'
+      );
+      this.router.navigate(['/login']);
+    });
+  }
 
 }
